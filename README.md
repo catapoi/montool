@@ -17,3 +17,19 @@ Monitoring tool for DNS and Http
   - source montool-env/bin/activate
   
 https://linuxize.com/post/how-to-create-python-virtual-environments-on-ubuntu-18-04/ 
+
+
+Set up mongodb with python
+
+pip install pymongo==3.4.0 
+import pymongo
+brew install mongodb 
+
+Check:
+
+import pymongo
+
+Install mongo
+
+sudo apt install linuxbrew-wrapper
+sudo brew install mongodb
