@@ -16,3 +16,4 @@ Monitoring tool for DNS and Http
   It will create the virtenv in the current directory, and you'll to activate using:
   - source montool-env/bin/activate
   
+https://linuxize.com/post/how-to-create-python-virtual-environments-on-ubuntu-18-04/ 
