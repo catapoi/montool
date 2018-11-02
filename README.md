@@ -50,3 +50,14 @@ Config Brew and Mongo
 - Further documentation: 
     http://docs.brew.sh
 Warning: /home/linuxbrew/.linuxbrew/bin is not in your PATH.
+
+Config Brew
+
+isl@0.18 is keg-only, which means it was not symlinked into /home/linuxbrew/.linuxbrew,
+because this is an alternate version of another formula.
+
+For compilers to find isl@0.18 you may need to set:
+      export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/isl@0.18/lib"
+      export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/isl@0.18/include"
+
+
