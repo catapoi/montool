@@ -32,4 +32,5 @@ import pymongo
 Install mongo
 
 sudo apt install linuxbrew-wrapper
-sudo brew install mongodb
+
+brew install mongodb
