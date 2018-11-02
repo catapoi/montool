@@ -30,34 +30,18 @@ Check:
 import pymongo
 
 Install mongo
-
-sudo apt install linuxbrew-wrapper
-
-brew install mongodb
-
-Config Brew and Mongo
-
-- Add Linuxbrew to your ~/.bash_profile by running
-
-1.      echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >>~/.bash_profile
-2.      echo 'export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"' >>~/.bash_profile
-3.      echo 'export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"' >>~/.bash_profile
-- Add Linuxbrew to your PATH
-        PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-- We recommend that you install GCC by running:
-    brew install gcc
-- Run `brew help` to get started
-- Further documentation: 
-    http://docs.brew.sh
-Warning: /home/linuxbrew/.linuxbrew/bin is not in your PATH.
-
-Config Brew
-
-isl@0.18 is keg-only, which means it was not symlinked into /home/linuxbrew/.linuxbrew,
-because this is an alternate version of another formula.
-
-For compilers to find isl@0.18 you may need to set:
-1.      export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/isl@0.18/lib"
-2.      export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/isl@0.18/include"
-
-
+sudo apt install -y mongodb
+Register as a service
+sudo systemctl status mongodb
+Check connection
+mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+MongoDB shell version v3.6.3
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.6.3
+{
+	"authInfo" : {
+		"authenticatedUsers" : [ ],
+		"authenticatedUserRoles" : [ ]
+	},
+	"ok" : 1
+}
