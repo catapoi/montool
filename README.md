@@ -34,3 +34,18 @@ Install mongo
 sudo apt install linuxbrew-wrapper
 
 brew install mongodb
+
+Config Brew and Mongo
+
+- Add Linuxbrew to your ~/.bash_profile by running
+    echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >>~/.bash_profile
+    echo 'export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"' >>~/.bash_profile
+    echo 'export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"' >>~/.bash_profile
+- Add Linuxbrew to your PATH
+    PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+- We recommend that you install GCC by running:
+    brew install gcc
+- Run `brew help` to get started
+- Further documentation: 
+    http://docs.brew.sh
+Warning: /home/linuxbrew/.linuxbrew/bin is not in your PATH.
