@@ -57,7 +57,7 @@ isl@0.18 is keg-only, which means it was not symlinked into /home/linuxbrew/.lin
 because this is an alternate version of another formula.
 
 For compilers to find isl@0.18 you may need to set:
-      export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/isl@0.18/lib"
-      export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/isl@0.18/include"
+1.      export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/isl@0.18/lib"
+2.      export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/isl@0.18/include"
 
 
