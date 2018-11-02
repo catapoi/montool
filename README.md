@@ -49,3 +49,7 @@ import pymongo
 	},
 	"ok" : 1
 }
+
+Install mongoengine
+
+pip install mongoengine==0.10.7 
