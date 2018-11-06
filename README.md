@@ -39,6 +39,10 @@ import pymongo
 	mongo --eval 'db.runCommand({ connectionStatus: 1 })'
 	
 	
+	
+Create virtualenv for python3 
+https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3 
+	
 	MongoDB shell version v3.6.3
 	connecting to: mongodb://127.0.0.1:27017
 	MongoDB server version: 3.6.3
