@@ -60,3 +60,25 @@ pip install mongoengine==0.10.7
 
 
 https://realpython.com/introduction-to-mongodb-and-python/ 
+
+Add nano highlights  
+I used this command to quickly enable all available languages.
+
+find /usr/share/nano/ -iname "*.nanorc" -exec echo include {} \; >> ~/.nanorc
+
+As mentioned in other answers, /usr/share/nano/ contains the definitions for different languages.
+
+$ ls /usr/share/nano
+asm.nanorc     fortran.nanorc   man-html       ocaml.nanorc   ruby.nanorc
+awk.nanorc     gentoo.nanorc    man.nanorc     patch.nanorc   sh.nanorc
+cmake.nanorc   groff.nanorc     mgp.nanorc     perl.nanorc    tcl.nanorc
+c.nanorc       html.nanorc      mutt.nanorc    php.nanorc     tex.nanorc
+css.nanorc     java.nanorc      nanorc.nanorc  pov.nanorc     xml.nanorc
+debian.nanorc  makefile.nanorc  objc.nanorc    python.nanorc
+
+Also mentioned, to enable highlighting for a language, you add include and the path to the language definition you want to enable to your ~/.nanorc file. So, for example, to enable C/C++ you would add this line.
+
+include /usr/share/nano/c.nanorc
+
+
+
