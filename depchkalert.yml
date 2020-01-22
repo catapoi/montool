@@ -1,0 +1,30 @@
+---
+################################################################################################################
+# IAT@metrosystems.net
+# Deploy chk_alert9.sh script [Control-M/Server] /metro/scripts
+# Write configs for Crontab, Clean up Postgresql
+# Bucharest September 2019
+# Version 1.1
+################################################################################################################
+# Usage:
+# - Watch on Confluence
+################################################################################################################
+- hosts: all
+  become_user: ctmuser
+  tasks:
+  - name: Copy chk_alert9.sh to /ctm_srv/metro/scripts/
+    copy:
+      src: /ctm007/emu007/metro/scripts/chk_alert9.sh
+      dest: /ctm_srv/metro/scripts
+      mode: u+rwx,g-wx,o-rwx
+  - name: Update cron config with Check alert mechanism
+    cron:
+      name: Chk_alert
+      minute: "*/5"
+      job: 'csh -c "~/metro/scripts/chk_alert9.sh $USER "'
+  - name: Delete files older then 5 days from Postgresql Log
+    shell: 
+      find . -type f -ctime +5 -exec rm {} \;
+    args:
+      chdir: /ctm_srv/pgsql/data/pg_log/
+...

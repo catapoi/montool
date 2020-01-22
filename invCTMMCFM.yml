@@ -1,0 +1,10 @@
+LXSRVMGI5428.mgi.de ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5429.mgi.de ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5430.mgi.de ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5431.mgi.de ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5432.mgi.de ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5433.MGI.DE ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5434.MGI.DE ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5435.MGI.DE ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+LXSRVMGI5436.MGI.DE ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
+

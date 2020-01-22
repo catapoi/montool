@@ -1,0 +1,38 @@
+##########################################
+# Playbook backup and restore EM configs #
+# MetroSYStems Romania @2018             #
+# @IAT@metrosystems.net                  #
+# ########################################
+---
+- hosts: all
+  gather_facts: yes
+  become_user: "{{ ansible_user }}"
+  tasks:
+#  - name: Set up a file with datetime and hostname
+#    shell: touch {{ ansible_hostname }}_{{ ansible_date_time.date }}
+  - name: Get the HomeDir of emu user
+    shell: mkdir -pv  $HOME/backup
+  - name: Copy export script
+    copy:
+      src: /ctm007/emu007/playbooks/handlers/runbackup.sh
+      dest: ~/backup/
+      mode: 0755
+  - name: Execute backup
+    shell: sh $HOME/backup/runbackup.sh
+  - name: Copy backup file
+    shell: cp $HOME/backup_`hostname` $HOME/backup
+  - name: Copy database configuration
+    shell: cp $HOME/ctm_em/pgsql/data/postgresql.conf $HOME/backup/
+  - name: Create archive for EM
+    shell: tar -zcf {{ ansible_hostname }}_{{ ansible_date_time.date }}.tar.gz $HOME/backup/
+  - name: Copy archive to backup center NFS on lxsrvmgi5267.mgi.de
+    shell: cp *.tar.gz /ctm/ctmbackup/
+  - name: Cleanup ansible folder
+    shell: rm -rf ansible-tmp-*
+  - name: Cleanup backup folder
+    shell: rm -rf $HOME/backup
+  - name: Cleanup EM archive
+    shell: rm -rf $HOME/backup_*
+  - name: Delete archive from servers
+    shell: rm -rf *.tar.gz
+...

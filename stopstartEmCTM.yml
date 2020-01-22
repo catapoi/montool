@@ -1,0 +1,23 @@
+##########################################
+# Playbook restart EM 			 #
+# MetroSYStems Romania @2019             #
+# @IAT@metrosystems.net                  #
+# ########################################
+---
+- hosts: all
+  gather_facts: yes
+  become_user: "{{ ansible_user }}"
+  tasks:
+#  - name: Set up a file with datetime and hostname
+#    shell: touch {{ ansible_hostname }}_{{ ansible_date_time.date }}
+#  - name: Stop all EM components
+#    expect: 
+#      command: stop_all
+#      responses:
+#        Question: 
+#          - dien19bien54phu
+#          - y
+  - name: Stop all EM components
+    shell: sh $HOME/metro/scripts/shut_em_srv.sh
+...
+

@@ -1,0 +1,36 @@
+---
+################################################################################################################
+## IAT@metrosystems.net
+## Deploy Crontab config for CTM Servers
+## Deploy agent script 
+## Bucharest September 2019
+## Version 1.0
+#################################################################################################################
+- hosts: all
+  become_user: ctmuser
+  tasks:
+  - name: Stopping Control M config agent
+    shell:
+      shut_ca
+  - name: Stopping Control M server
+    shell:
+      shut_ctm
+  - name: Stopping server database
+    shell:
+      shutdb
+# - name: Cleanup proclog files older then 2 days
+#   shell:
+#     find . -type f -ctime +2 -exec rm {} \;
+#   args:
+#     chdir: /ctm_srv/ctm_server/proclog/
+  - name: Start Database server
+    shell:
+      startdb
+  - name: Start CTM server
+    shell:
+      start_ctm
+  - name: Start configuration agent
+    shell:
+      start_ca
+...
+

@@ -1,0 +1,77 @@
+---
+################################################################################################################
+# IAT@metrosystems.net
+# Deploy configs for  CTM servers in [Control-M/Server Home]/data/config.dat file
+# Write configs for Crontab
+# Bucharest September 2019
+# Version 1.1
+################################################################################################################
+# Usage:
+# - Watch on Confluence
+################################################################################################################
+- hosts: all
+  become_user: ctmuser
+  tasks:
+  - name: Copy checkaginv.sh to /ctm_srv/metro/scripts/
+    copy:
+      src: /ctm007/emu007/monitoring/check_mk/local/checkaginv.sh
+      dest: /ctm_srv/metro/scripts
+      mode: u+rwx,g-wx,o-rwx
+  - name: Copy checkag.sh to CTM servers
+    copy:
+      src: /ctm007/emu007/monitoring/scripts/checkag.sh
+      dest: /ctm_srv/
+      mode: u+rwx,g-wx,o-rwx
+  - name: Update cron config with Check alert mechanism
+    cron:
+      name: Chk_alert
+      minute: "5"
+      job: 'csh -c "~/metro/scripts/chk_alert.sh $USER "'
+  - name: Add check_agent to Crontab
+    cron:
+      name: Check agent list
+      job: 'csh -c "bash -c /ctm_srv/metro/scripts/checkaginv.sh"'
+  - name: Add logrotate config to crontab
+    cron: 
+      name: Logrotate
+      weekday: "6"
+      job: "/usr/sbin/logrotate  -s ~/metro/log/logrotate.status ~/metro/log/logrotate.conf"
+  - name: Update config file of CTM server OS_DIAG_LIMIT_LOG_FILE_SIZE to 10
+    lineinfile:
+      path: /ctm_srv/ctm_server/data/config.dat
+      regexp: '^OS_DIAG_LIMIT_LOG_FILE_SIZE 15'
+      line: 'OS_DIAG_LIMIT_LOG_FILE_SIZE 10'
+  - name: Update config file of CTM server OS_DIAG_LIMIT_LOG_VERSIONS to 5
+    lineinfile:
+      path: /ctm_srv/ctm_server/data/config.dat
+      regexp: '^OS_DIAG_LIMIT_LOG_VERSIONS 20'
+      line: 'OS_DIAG_LIMIT_LOG_VERSIONS 5'
+  - name: Update config file of CTM server CYCLIC MAX_WAIT NOT_KEEP
+    lineinfile:
+      path: /ctm_srv/ctm_server/data/config.dat
+      line: 'CYCLIC MAX_WAIT NOT_KEEP'
+  - name: Stopping Control M config agent
+    shell:
+      shut_ca
+  - name: Stopping Control M server
+    shell:
+      shut_ctm
+  - name: Stopping server database
+    shell:
+      shutdb
+  - name: Cleanup proclog files older then 2 days
+    shell:
+      find . -type f -ctime +2 -exec rm {} \;
+    args:
+      chdir: /ctm_srv/ctm_server/proclog/
+  - name: Start Database server
+    shell:
+      startdb
+  - name: Start CTM server
+    shell:
+      start_ctm
+  - name: Start configuration agent
+    shell:
+      start_ca
+...
+

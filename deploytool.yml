@@ -1,0 +1,27 @@
+##########################################
+# Playbook for files deployment          #
+# MetroSYStems Romania @2019             #
+# @IAT@metrosystems.net                  #
+# ########################################
+---
+- hosts: all
+  gather_facts: yes
+  become_user: "{{ ansible_user }}"
+  tasks:
+#  - name: Set up a file with datetime and hostname
+#    shell: touch {{ ansible_hostname }}_{{ ansible_date_time.date }}
+  - name: Copy count script for EM version 8
+    copy:
+      src: /ctm007/emu007/export/max_jobs.sh
+      dest: $HOME/
+      mode: preserve
+    when: (ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "6")
+  - name: Copy count script for EM version 9
+    copy:
+      src: /ctm007/emu007/export/max_jobs9.sh
+      dest: $HOME/
+      mode: preserve
+    when: (ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "7")
+  - name: Cleanup ansible folder
+    shell: rm -rf ansible-tmp-*
+...

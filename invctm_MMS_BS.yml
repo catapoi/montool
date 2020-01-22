@@ -1,0 +1,1 @@
+LXSRVMGI5118.mgi.de ansible_user=ctmuser ansible_connection=ssh ansible_shell_type=csh
